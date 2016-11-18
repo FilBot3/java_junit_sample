@@ -1,0 +1,8 @@
+# VIM Files
+*~
+*.sw[a-z0-9]
+
+# Java compiled files
+*.class
+*.jar
+

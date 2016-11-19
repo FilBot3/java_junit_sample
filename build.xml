@@ -78,7 +78,7 @@
     <target name="main" depends="clean,compile" description="[Default] Clean binaries, and run the application after compilation." />
 
     <!-- Compile the JUnit Tests --> 
-    <target name="junit-compile" depends="compile" description="Compile the JUnit Tests.">
+    <target name="junit-compile" depends="compile,setup" description="Compile the JUnit Tests.">
         <mkdir dir="${test.class.dir}" />
         <javac srcdir="${src.dir}/test" destdir="${test.class.dir}" includeantruntime="false" classpath="${classes.dir}/test" >
             <classpath refid="classpath.test" />

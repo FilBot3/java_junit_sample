@@ -1,10 +1,11 @@
 <project name="HelloWorld" basedir="." default="main">
-    <property name="src.dir" value="src" />
-    <property name="build.dir" value="build" />
-    <property name="classes.dir" value="${build.dir}/classes" />
-    <property name="jar.dir" value="${build.dir}/jars" /> 
-    <property name="main-class" value="sample.SampleClass" />
+    <property name="src.dir"        value="src" />
+    <property name="build.dir"      value="build" />
+    <property name="classes.dir"    value="${build.dir}/classes" />
+    <property name="jar.dir"        value="${build.dir}/jars" />
+    <property name="main-class"     value="sample.SampleClass" />
     <property name="test.class.dir" value="${classes.dir}/test" />
+    <property name="doc.dir"        value="doc" />
     <!-- Setting the Classpath for compliations
     -->
     <path id="classpath" description="Sets the classpath for the Java program">
@@ -16,7 +17,7 @@
         <pathelement location="lib/hamcrest-core-1.3.jar" />
         <pathelement location="${classes.dir}/main" />
     </path>
-    <!-- Clean Target action 
+    <!-- Clean Target action
         This will just delete the dist directory
     -->
     <target name="clean" description="Remove all compiled files and binaries.">
@@ -27,23 +28,23 @@
     -->
     <target name="compile" description="Compile all source code files in src">
         <mkdir dir="${classes.dir}/main" />
-        <javac 
-            includeantruntime="false" 
-            srcdir="${src.dir}/main" 
+        <javac
+            includeantruntime="false"
+            srcdir="${src.dir}/main"
             destdir="${classes.dir}/main" />
     </target>
     <!-- Create the JAR file
-        There is no need to have a manifest.txt as ant will generate it for you 
-        when the JAR file is created. 
+        There is no need to have a manifest.txt as ant will generate it for you
+        when the JAR file is created.
     -->
     <target name="jar" depends="compile" description="Build the distributable JAR file">
         <jar
             destfile="${jar.dir}/${ant.project.name}.jar"
             basedir="${classes.dir}/main" >
             <manifest>
-                <attribute 
-                    name="Main-Class" 
-                    value="${main-class}" /> 
+                <attribute
+                    name="Main-Class"
+                    value="${main-class}" />
             </manifest>
         </jar>
     </target>
@@ -71,14 +72,14 @@
             dir="${classes.dir}"
             classname="${main-class}" />
     </target>
-    <!-- Clean and then Build the project 
+    <!-- Clean and then Build the project
     -->
     <target name="clean-build" depends="clean,jar" description="Clean binaries, and recreate the JAR file" />
     <!-- The default target, clean and run.
     -->
     <target name="main" depends="clean,compile" description="[Default] Clean binaries, and run the application after compilation." />
 
-    <!-- Compile the JUnit Tests --> 
+    <!-- Compile the JUnit Tests -->
     <target name="junit-compile" depends="compile,setup" description="Compile the JUnit Tests.">
         <mkdir dir="${test.class.dir}" />
         <javac srcdir="${src.dir}/test" destdir="${test.class.dir}" includeantruntime="false" classpath="${classes.dir}/test" >
@@ -101,11 +102,14 @@
     </target>
     <target name="setup" description="Download required JAR Libraries and place in ./lib/" >
         <mkdir dir="lib" />
-        <get 
+        <get
             src="http://search.maven.org/remotecontent?filepath=junit/junit/4.12/junit-4.12.jar"
             dest="lib/junit-4.12.jar" />
-        <get 
+        <get
             src="http://search.maven.org/remotecontent?filepath=org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"
             dest="lib/hamcrest-core-1.3.jar" />
+    </target>
+    <target name="doc" description="Generate the JavaDoc">
+      <javadoc sourcepath="${src.dir}/main" destdir="${doc.dir}" />
     </target>
 </project>

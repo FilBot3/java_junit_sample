@@ -11,6 +11,7 @@ BUILD_DIR = 'build'.freeze
 CLASSES_DIR = "#{BUILD_DIR}/classes".freeze
 JARS_DIR = "#{BUILD_DIR}/jars".freeze
 TESTS_CLASSES_DIR = "#{CLASSES_DIR}/test".freeze
+DOCS_DIR = 'docs'.freeze
 
 # Default task when rake is ran without any arguments.
 task default: ['java:clean', 'java:compile']
@@ -105,6 +106,11 @@ namespace :java do
         path(location: "#{JARS_DIR}/#{PROJECT_NAME}.jar")
       end
     end
+  end
+
+  desc 'Generate the JavaDocs.'
+  task doc: ['java:setup_compile'] do
+    ant.javadoc(sourcepath: MAIN_SRC_DIR, destdir: DOCS_DIR)
   end
 
   desc 'Run JRuby File.'

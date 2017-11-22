@@ -9,11 +9,12 @@
     -->
     <path id="classpath" description="Sets the classpath for the Java program">
         <fileset dir="." />
+        <!--fileset dir="${classes.dir}/main" /-->
     </path>
     <path id="classpath.test" description="Sets the classpath for JUnit.">
         <pathelement location="lib/junit-4.12.jar" />
         <pathelement location="lib/hamcrest-core-1.3.jar" />
-        <pathelement location="${classes.dir}" />
+        <pathelement location="${classes.dir}/main" />
     </path>
     <!-- Clean Target action 
         This will just delete the dist directory
@@ -25,11 +26,11 @@
         It seems like this just goes through and compiles each file.
     -->
     <target name="compile" description="Compile all source code files in src">
-        <mkdir dir="${classes.dir}" />
+        <mkdir dir="${classes.dir}/main" />
         <javac 
             includeantruntime="false" 
             srcdir="${src.dir}/main" 
-            destdir="${classes.dir}" />
+            destdir="${classes.dir}/main" />
     </target>
     <!-- Create the JAR file
         There is no need to have a manifest.txt as ant will generate it for you 
@@ -38,7 +39,7 @@
     <target name="jar" depends="compile" description="Build the distributable JAR file">
         <jar
             destfile="${jar.dir}/${ant.project.name}.jar"
-            basedir="${classes.dir}" >
+            basedir="${classes.dir}/main" >
             <manifest>
                 <attribute 
                     name="Main-Class" 
@@ -65,7 +66,7 @@
         <echo message="Running the class file." />
         <java
             fork="true"
-            classpath="${classes.dir}"
+            classpath="${classes.dir}/main"
             failonerror="yes"
             dir="${classes.dir}"
             classname="${main-class}" />

@@ -15,6 +15,13 @@ package sample.version;
  * @since 2016-11-18
  */
 public class Version {
+	/**
+	 * Used to store the version number. 
+	 * Similar to how Ruby does their versioning.
+	 * 
+	 * @param none
+	 * @return none
+	 */
 	public void VERSION() {
 		String version = "0.1.0";
 		System.out.println(version);

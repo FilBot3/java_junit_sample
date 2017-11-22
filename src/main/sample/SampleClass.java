@@ -27,7 +27,8 @@ class Dog {
 }
 
 /** 
- * Entry point into the application. 
+ * <h1>Entry point into the application. </h1>
+ * <p>
  * This is the main file and class for the application.
  * The JAR and Classes will be ran from here. 
  */
@@ -35,6 +36,7 @@ public class SampleClass extends Dog {
     /**
      * print_words displays text on the screen.
      * 
+     * @author Phillip Dudley
      * @param none
      * @return String (Hello World!)
      */

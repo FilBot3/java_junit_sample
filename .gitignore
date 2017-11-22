@@ -3,6 +3,8 @@
 *.sw[a-z0-9]
 
 # Java compiled files
-*.class
-*.jar
+build/
+docs/
 
+# Java Libraries
+lib/

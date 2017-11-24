@@ -22,10 +22,12 @@ namespace :java do
     ant.mkdir(dir: 'lib')
     ant.get(
       src: 'http://search.maven.org/remotecontent?filepath=junit/junit/4.12/junit-4.12.jar',
-      dest: 'lib/junit-4.12.jar')
+      dest: 'lib/junit-4.12.jar'
+    )
     ant.get(
       src: 'http://search.maven.org/remotecontent?filepath=org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar',
-      dest: 'lib/hamcrest-core.1.3.jar')
+      dest: 'lib/hamcrest-core.1.3.jar'
+    )
   end
 
   task setup_test: ['java:deps'] do
@@ -54,7 +56,8 @@ namespace :java do
     ant.javac(
       includeantruntime: 'false',
       srcdir: MAIN_SRC_DIR,
-      destdir: "#{CLASSES_DIR}/main")
+      destdir: "#{CLASSES_DIR}/main"
+    )
   end
 
   desc 'Create the Java Project JAR.'
